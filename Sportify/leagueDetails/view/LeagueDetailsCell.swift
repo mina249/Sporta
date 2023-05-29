@@ -9,7 +9,7 @@ import UIKit
 
 class LeagueDetailsCell: UICollectionViewCell {
 
-    @IBOutlet var noMatches: UILabel!
+  
     @IBOutlet var secTeamName: UILabel!
     @IBOutlet var secTeamImg: UIImageView!
     @IBOutlet var time: UILabel!
@@ -23,7 +23,7 @@ class LeagueDetailsCell: UICollectionViewCell {
         firstTeamImg.layer.cornerRadius = firstTeamImg.frame.width / 2
         secTeamImg.frame.size.width = secTeamImg.frame.size.height
         secTeamImg.layer.cornerRadius = secTeamImg.frame.width / 2
-        noMatches.isHidden = true
+        
         
     }
 

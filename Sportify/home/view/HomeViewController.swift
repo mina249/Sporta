@@ -14,8 +14,10 @@ class HomeViewController: UIViewController {
     @IBOutlet var sportsCtegoryView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let color = UIColor(red: 36/255, green: 36/255, blue: 36/255, alpha: 1)
         self.tabBarController?.tabBar.backgroundColor = color
+        tabBarController?.tabBar.isHidden = false
         sportsCollectionView.dataSource = self
         sportsCollectionView.delegate = self
         sportsCtegoryView.roundCorners(corners: [.topLeft,.topRight], radius: 30)
@@ -24,6 +26,9 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         appNameLabel.text = ""
         sportsCtegoryView.roundCorners(corners: [.topLeft,.topRight], radius: 30)
+        tabBarController?.tabBar.isHidden = false
+        navigationItem.leftBarButtonItem?.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
        
 }
     override func viewDidAppear(_ animated: Bool) {

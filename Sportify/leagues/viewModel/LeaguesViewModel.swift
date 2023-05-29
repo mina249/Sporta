@@ -13,9 +13,10 @@ class LeaguesViewModel{
     
     
     func loadLeaguesList(for sportName:String){
-        network.getLeaguesList(sportName: sportName) { [weak self](leagues) in
-            self?.result = leagues
-            print(leagues[0].league_name)
+        network.getLeaguesList(sportName: sportName) { [weak self](leagues , error) in
+            if let leagues = leagues{
+                self?.result = leagues
+            }
             DispatchQueue.main.async {
                 self?.bindedResult()
             }

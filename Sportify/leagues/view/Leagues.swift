@@ -13,7 +13,6 @@ class Leagues: UITableViewController {
     var sportName:String? = nil
  var leagues = [League]()
     let leaguesViewModel = LeaguesViewModel()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "FavouritesLeagueCell", bundle: nil), forCellReuseIdentifier: K.leagueCellIdentifier)
@@ -28,13 +27,15 @@ class Leagues: UITableViewController {
     func loadData(){
         leaguesViewModel.bindedResult={
             self.leagues = self.leaguesViewModel.result
+         
             self.tableView.reloadData()
-          //  print("didlload: \(self.leagues[0].league_name)")
+       
         }
         guard let sportName = sportName else{return
             
         }
         leaguesViewModel.loadLeaguesList(for: sportName)
+        
       
         tableView.reloadData()
     }
@@ -85,6 +86,13 @@ extension Leagues : UISearchBarDelegate{
                leagues = filtered
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
+        UIView.animate(withDuration: 0.35) {
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1)
         }
     }
 }

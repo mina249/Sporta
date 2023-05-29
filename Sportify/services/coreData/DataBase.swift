@@ -12,6 +12,10 @@ import UIKit
 class DataBase{
 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    init(){
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    }
+    
     func saveTeamToFavourite(name:String , image:Data,teamId:Int){
         let team = FavouriteTeam(context: context)
         team.image = image

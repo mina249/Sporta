@@ -10,6 +10,7 @@ import SDWebImage
 
 class TeamDetailsViewController: UIViewController {
 
+    @IBOutlet var loading: UIActivityIndicatorView!
     @IBOutlet var teanView: UIView!
     @IBOutlet var playersCollection: UICollectionView!
     @IBOutlet var coachName: UILabel!
@@ -25,8 +26,6 @@ class TeamDetailsViewController: UIViewController {
         teamImg.frame.size.width = teamImg.frame.size.height
         teamImg.layer.cornerRadius = teamImg.frame.size.height / 2
         teamImg.image = UIImage(named: "noImage")
-        teanName.text = "Real Madrid"
-        coachName.text = "Carlo Anchiloti"
         playersCollection.dataSource = self
         playersCollection.dataSource = self
         teanView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 30)
@@ -37,6 +36,7 @@ class TeamDetailsViewController: UIViewController {
             self.teanName.text = self.currentTeam.team_name
             self.coachName.text = self.currentTeam.coaches![0].coach_name
             self.players = self.currentTeam.players!
+            self.loading.isHidden = true
             self.playersCollection.reloadData()
         }
         teamViewModel.loadTeamDetails(teamId: teamId!)

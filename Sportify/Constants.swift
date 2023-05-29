@@ -18,6 +18,7 @@ struct K{
     static let teamLogoCell = "teamLogoCell"
     static let APIKey = "2946a756ac2c8d4b77e4076020d1314283bbc02c397b76d770ef995f0d6f6e6e"//"2946a756ac2c8d4b77e4076020d1314283bbc02c397b76d770ef995f0d6f6e6e"
     static let baseUrl = "https://apiv2.allsportsapi.com/"
+    static let noDataIdentifier = "NoDataCell"
   
     struct SportName{
         static let footbaall = "football"

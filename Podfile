@@ -17,4 +17,7 @@ target 'Sportify' do
   end
 pod 'SDWebImage', '~> 5.0'
 
+pod 'lottie-ios'
+
+
 end

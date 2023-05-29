@@ -15,7 +15,7 @@ class TeamsViewModel{
     
     func loadTeamDetails(teamId:Int){
         let teamURL = "\(K.baseUrl)\(K.SportName.footbaall)\(teamUrl)&teamId=\(teamId)"
-        network.getTeamById(url: teamURL) { team in
+        network.getTeamById(url: teamURL) { team,error  in
             self.team = team
             DispatchQueue.main.async {
                 self.bindedResult()

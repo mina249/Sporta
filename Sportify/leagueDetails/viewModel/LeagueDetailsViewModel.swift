@@ -28,8 +28,10 @@ class LeagueDetailsViewModel{
     
     func loadCommingEvents(for sportName:String, and id:Int){
         let commingUrl = "\(K.baseUrl)\(sportName)\(EventsURL)&leagueId=\(id)&from=\(K.getCurrentDate())&to=\(K.getNextDate())"
-        network.getLeagueEvent(url: commingUrl) {[weak self] (events) in
-            self?.commingEvents = events
+        network.getLeagueEvent(url: commingUrl) {[weak self] (events ,error) in
+            if let events = events{
+                self?.commingEvents = events
+            }
             DispatchQueue.main.async {
                 self?.bindedResult()
             }
@@ -37,9 +39,10 @@ class LeagueDetailsViewModel{
     }
     func loadFinishedEvents(for sportName:String, and id:Int){
         let commingUrl = "\(K.baseUrl)\(sportName)\(EventsURL)&leagueId=\(id)&from=\(K.getPastDate())&to=\(K.getCurrentDate())"
-        network.getLeagueEvent(url: commingUrl) { [weak self](events) in
-            self?.fineshedEvents = events
-            print("finished: \(events.count)")
+        network.getLeagueEvent(url: commingUrl) { [weak self](events , error) in
+            if let events = events{
+                self?.fineshedEvents = events
+            }
             DispatchQueue.main.async {
                 self?.bindedFinishedResult()
             }
@@ -48,8 +51,10 @@ class LeagueDetailsViewModel{
     
     func loadTeams(sportName:String,leagueId:Int){
         let url = "\(K.baseUrl)\(sportName)\(teamsUrl)&leagueId=\(leagueId)"
-        network.getTeams(url: url) { [weak self](teams) in
-            self?.teams = teams
+        network.getTeams(url: url) { [weak self](teams , error) in
+            if let teams = teams{
+                self?.teams = teams
+            }
             DispatchQueue.main.async {
                 self?.teamsResult()
             }

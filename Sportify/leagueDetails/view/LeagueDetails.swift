@@ -12,10 +12,11 @@ private let reuseIdentifier = "Cell"
 class LeagueDetails: UICollectionViewController {
     let detailsModel = LeagueDetailsViewModel()
     var sportName:String?
+    @IBOutlet var loading: UIActivityIndicatorView!
     var sportId:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-       // collectionView.register(UINib(nibName: "LeagueDetailsCell", bundle: nil), forCellWithReuseIdentifier: K.leagueDetailsCell)
+      
         let layout = UICollectionViewCompositionalLayout{ sectionIndex , enviroment in
             switch sectionIndex{
             case 0:
@@ -28,6 +29,7 @@ class LeagueDetails: UICollectionViewController {
         }
         collectionView.setCollectionViewLayout(layout, animated: true)
         collectionView.register(UINib(nibName: "SectionHeader", bundle: nil), forSupplementaryViewOfKind: "header", withReuseIdentifier: "headerCell")
+        collectionView.register(UINib(nibName: "NoDataCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: K.noDataIdentifier)
         
         loadFootBallEvents()
     }
@@ -43,12 +45,25 @@ class LeagueDetails: UICollectionViewController {
         // #warning Incomplete implementation, return the number of items
         switch section{
         case 0:
+            if detailsModel.commingEvents.count>0{
                 return detailsModel.commingEvents.count
+            }else{
+                return 1
+            }
         case 2:
+            if detailsModel.fineshedEvents.count > 0{
                 return detailsModel.fineshedEvents.count
+            }else{
+                return 1
+            }
             
         default:
-            return detailsModel.teams.count
+            if detailsModel.teams.count > 0 {
+                
+                return detailsModel.teams.count
+            }else{
+                return 1
+            }
         }
     }
     
@@ -57,9 +72,8 @@ class LeagueDetails: UICollectionViewController {
         switch indexPath.section{
             
         case 0 :
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.leagueDetailsCell, for: indexPath) as! LeagueDetailsCell
-         
-                
+            if detailsModel.commingEvents.count > 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.leagueDetailsCell, for: indexPath) as! LeagueDetailsCell
                 let event = detailsModel.getCommingEvent(sportName: sportName!, index: indexPath.row)
                 cell.score.text = event.finalResult
                 cell.firstTeamImg.sd_setImage(with: URL(string: event.firstTeamLogo ), placeholderImage: UIImage(named: "noImage"))
@@ -68,18 +82,27 @@ class LeagueDetails: UICollectionViewController {
                 cell.secTeamName.text = event.SecTeamName
                 cell.date.text = event.date
                 cell.time.text = event.time
-            return cell
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.noDataIdentifier, for: indexPath) as! NoDataCollectionViewCell
+                return cell
+            }
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.teamLogoCell, for: indexPath) as! TeamsLogoCell
-            let team = detailsModel.getTeam(index: indexPath.row)
-            cell.teamLogo.frame.size.width = cell.teamLogo.frame.height
-            cell.teamLogo.layer.cornerRadius = 20
-            cell.teamLogo.sd_setImage(with: URL(string: team.logo ), placeholderImage: UIImage(named: "noImage"))
-            cell.teamName.text = team.name
-            return cell
+            if detailsModel.teams.count > 0{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.teamLogoCell, for: indexPath) as! TeamsLogoCell
+                let team = detailsModel.getTeam(index: indexPath.row)
+                cell.teamLogo.frame.size.width = cell.teamLogo.frame.height
+                cell.teamLogo.layer.cornerRadius = 20
+                cell.teamLogo.sd_setImage(with: URL(string: team.logo ), placeholderImage: UIImage(named: "noImage"))
+                cell.teamName.text = team.name
+                return cell
+            }else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.noDataIdentifier, for: indexPath) as! NoDataCollectionViewCell
+                return cell
+            }
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.leagueDetailsCell, for: indexPath) as! LeagueDetailsCell
             if detailsModel.fineshedEvents.count > 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.leagueDetailsCell, for: indexPath) as! LeagueDetailsCell
                 let event = detailsModel.getFinshedEvent(sportName: sportName!, index: indexPath.row)
                 cell.score.text = event.finalResult
                 cell.firstTeamImg.sd_setImage(with: URL(string: event.firstTeamLogo ), placeholderImage: UIImage(named: "noImage"))
@@ -88,10 +111,12 @@ class LeagueDetails: UICollectionViewController {
                 cell.secTeamName.text = event.SecTeamName
                 cell.date.text = event.date
                 cell.time.text = event.time
+                return cell
             }else{
-                cell.noMatches.isHidden = false
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.noDataIdentifier, for: indexPath) as! NoDataCollectionViewCell
+                return cell
+                
             }
-            return cell
         }
         
     }
@@ -137,9 +162,17 @@ class LeagueDetails: UICollectionViewController {
     
     
     func midSection()->NSCollectionLayoutSection{
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
+        let itemSize : NSCollectionLayoutSize!
+        let groupSize : NSCollectionLayoutSize!
+        if detailsModel.teams.count > 0 {
+            itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
+            groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(0.25))
+        }else{
+            itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .fractionalHeight(0.25))
+        }
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(0.25))
+       
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
@@ -175,7 +208,7 @@ class LeagueDetails: UICollectionViewController {
     func loadFootBallEvents(){
     
         detailsModel.bindedFinishedResult={
-            //self.footBallFinishedEvents = self.detailsModel.fineshedEvents
+            self.loading.isHidden = true
             self.collectionView.reloadData()
         }
         detailsModel.bindedResult={

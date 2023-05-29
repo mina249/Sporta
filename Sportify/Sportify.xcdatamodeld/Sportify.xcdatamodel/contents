@@ -4,5 +4,10 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="teamId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
 </model>

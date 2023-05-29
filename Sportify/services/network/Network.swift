@@ -6,9 +6,12 @@
 //
 
 import Foundation
-class Network{
+class Network:NetworkProtocol{
     let leaguesURL = "/?met=Leagues&APIkey=\(K.APIKey)"
-    func getLeaguesList(sportName:String, completionHandler:@escaping([League] )-> Void){
+    
+  
+    
+    func getLeaguesList(sportName:String, completionHandler:@escaping([League]? , Error? )-> Void){
         
         if let  url = URL(string:"\(K.baseUrl)\(sportName)\(leaguesURL)"){
             
@@ -24,9 +27,9 @@ class Network{
                     do{
                         let decodedData:LeaguesModel =  try decoder.decode(LeaguesModel.self, from: safeData)
                         let leagues = decodedData.result
-                        completionHandler(leagues)
+                        completionHandler(leagues,nil)
                     }catch{
-                        
+                        completionHandler(nil,error)
                     }
                 }
             }
@@ -35,7 +38,7 @@ class Network{
         
     }
         
-    func getLeagueEvent(url:String,completionHandler:@escaping([EventResponse])-> Void){
+    func getLeagueEvent(url:String,completionHandler:@escaping([EventResponse]? ,Error?)-> Void){
    
         if let  url = URL(string:url){
             
@@ -52,10 +55,10 @@ class Network{
                     do{
                         let decodedData:EventDetailsModel =  try decoder.decode(EventDetailsModel.self, from: safeData)
                         if let events = decodedData.result{
-                            completionHandler(events)
+                            completionHandler(events,nil)
                         }
                     }catch{
-                       print("Error")
+                       completionHandler(nil,error)
                     }
                 }
                         
@@ -69,7 +72,7 @@ class Network{
         
     
     
-    func getTeams(url:String,completionHandler:@escaping([TeamData])-> Void){
+    func getTeams(url:String,completionHandler:@escaping([TeamData]? , Error?)-> Void){
    
         if let  url = URL(string:url){
             let session = URLSession(configuration: .default)
@@ -83,10 +86,10 @@ class Network{
                     do{
                         let decodedData:TeamModel =  try decoder.decode(TeamModel.self, from: safeData)
                         if let teams = decodedData.result{
-                            completionHandler(teams)
+                            completionHandler(teams,nil)
                         }
                     }catch{
-                       print("Error")
+                       completionHandler(nil,error)
                     }
                 }
                         
@@ -98,7 +101,7 @@ class Network{
             }
         
     
-    func getTeamById(url:String,completionHandler:@escaping(TeamData)-> Void){
+    func getTeamById(url:String,completionHandler:@escaping(TeamData?,Error?)-> Void){
    
         if let  url = URL(string:url){
             let session = URLSession(configuration: .default)
@@ -112,10 +115,10 @@ class Network{
                     do{
                         let decodedData:TeamModel =  try decoder.decode(TeamModel.self, from: safeData)
                         if let teams = decodedData.result?[0]{
-                            completionHandler(teams)
+                            completionHandler(teams,nil)
                         }
                     }catch{
-                       print("Error")
+                       completionHandler(nil,error)
                     }
                 }
                         
