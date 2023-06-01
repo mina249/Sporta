@@ -11,15 +11,15 @@ class LaunchScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.tabBar.isHidden = true
+       // tabBarController?.tabBar.isHidden = true
            let animationView = LottieAnimationView(name: "launch")
         animationView.center = self.view.center
            self.view.addSubview(animationView)
            animationView.play()
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-         let homeVC = self.storyboard?.instantiateViewController(identifier: "home") as! HomeViewController
-            self.navigationController?.pushViewController(homeVC, animated: true)
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "mainScreen")
+                    self.navigationController?.setViewControllers([mainVC], animated: true)
+                }
         
     }
     
