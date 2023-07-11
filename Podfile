@@ -18,6 +18,7 @@ target 'Sportify' do
 pod 'SDWebImage', '~> 5.0'
 
 pod 'lottie-ios'
+pod 'ReachabilitySwift'
 
 
 end

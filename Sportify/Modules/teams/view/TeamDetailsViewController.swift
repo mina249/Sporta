@@ -47,7 +47,7 @@ class TeamDetailsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         teanView.roundCorners(corners: [.bottomLeft,.bottomRight], radius: 30)
-       
+       loadTeamData()
     }
     
     func addTeamToFavourites(){

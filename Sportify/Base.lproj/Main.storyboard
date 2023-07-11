@@ -167,11 +167,6 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="ufg-SD-kOi">
-                            <rect key="frame" x="0.0" y="-59" width="393" height="852"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="teamLogoCell" id="55g-l9-2ie" customClass="TeamsLogoCell" customModule="Sportify" customModuleProvider="target">
                                 <rect key="frame" x="85.666666666666671" y="0.0" width="222" height="180"/>
@@ -204,6 +199,7 @@
                                         <constraint firstItem="dMD-aQ-A62" firstAttribute="top" secondItem="gCw-MG-fnd" secondAttribute="bottom" constant="10" id="yyU-m1-JYv"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.93333333333333335" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="222" height="180"/>
                                 <connections>
                                     <outlet property="teamLogo" destination="gCw-MG-fnd" id="PVT-TP-pek"/>
@@ -283,8 +279,10 @@
                                         <constraint firstItem="CMO-f2-L6N" firstAttribute="top" secondItem="Jlk-vZ-uGD" secondAttribute="top" constant="8" id="wwq-d7-ADI"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <color key="backgroundColor" red="0.90588235289999997" green="0.93333333330000001" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="364" height="146"/>
                                 <connections>
+                                    <outlet property="cellContainer" destination="Jlk-vZ-uGD" id="srp-qk-YmR"/>
                                     <outlet property="date" destination="Ya6-bI-h3M" id="XMS-tu-Z36"/>
                                     <outlet property="firstTeamImg" destination="PPt-we-Yrl" id="ECZ-Rj-iTF"/>
                                     <outlet property="firstTeamName" destination="hkx-gl-dgK" id="wD0-uF-ysY"/>
@@ -300,9 +298,6 @@
                             <outlet property="delegate" destination="Wci-Xx-SuA" id="bfh-rw-2ZM"/>
                         </connections>
                     </collectionView>
-                    <connections>
-                        <outlet property="loading" destination="ufg-SD-kOi" id="LHT-e6-Zj0"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R8s-WQ-yUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

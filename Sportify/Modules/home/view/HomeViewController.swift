@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Reachability
+
 
 class HomeViewController: UIViewController {
+    let reachability = try! Reachability()
     @IBOutlet var sportsCollectionView: UICollectionView!
     @IBOutlet var appNameLabel: UILabel!
     @IBOutlet var sportsCtegoryView: UIView!
@@ -82,8 +85,20 @@ extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       let leagueVC =  storyboard?.instantiateViewController(identifier: K.leagueClassIdentifier) as! Leagues
-        leagueVC.leaguesViewModel = homeViewModel.inistintiateLeaguesViewMode(index: indexPath.row)
-        navigationController?.pushViewController(leagueVC, animated: true)
+        if reachability.connection == .unavailable{
+            showAlert()
+        }else{
+            let leagueVC =  storyboard?.instantiateViewController(identifier: K.leagueClassIdentifier) as! Leagues
+            leagueVC.leaguesViewModel = homeViewModel.inistintiateLeaguesViewMode(index: indexPath.row)
+            navigationController?.pushViewController(leagueVC, animated: true)
+        }
+    }
+    
+    func showAlert(){
+        let alert = UIAlertController(title: "No Internet", message: "Connect To internet then try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default){ (action) in
+            alert.dismiss(animated: true)
+        })
+        self.present(alert, animated: true)
     }
 }

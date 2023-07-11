@@ -7,9 +7,11 @@
 
 import UIKit
 import CoreData
+import Reachability
+
 
 class Favourites: UITableViewController {
-  
+    let reachability = try! Reachability()
     @IBOutlet var nofav: UILabel!
     let favouriteViewModel = FavouritesViewModel()
     override func viewDidLoad() {
@@ -77,12 +79,21 @@ class Favourites: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let teamVC = storyboard?.instantiateViewController(identifier: K.teamClassIdentifier) as? TeamDetailsViewController
-        teamVC?.teamViewModel = favouriteViewModel.inistintiateTeamViewModel(index: indexPath.row)
-        if let teamVC  = teamVC {
-            navigationController?.pushViewController(teamVC, animated: true)
+        if reachability.connection == .unavailable{
+            showAlert()
+        }else{
+            let teamVC = storyboard?.instantiateViewController(identifier: K.teamClassIdentifier) as? TeamDetailsViewController
+            teamVC?.teamViewModel = favouriteViewModel.inistintiateTeamViewModel(index: indexPath.row)
+            if let teamVC  = teamVC {
+                navigationController?.pushViewController(teamVC, animated: true)
+            }
         }
-        
     }
-
+    func showAlert(){
+        let alert = UIAlertController(title: "No Internet", message: "Connect To internet then try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default){ (action) in
+            alert.dismiss(animated: true)
+        })
+        self.present(alert, animated: true)
+    }
 }

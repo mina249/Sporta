@@ -11,7 +11,7 @@
 		8C09D1AD2A250320002BA4A2 /* NoDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09D1AB2A250320002BA4A2 /* NoDataCollectionViewCell.swift */; };
 		8C09D1AE2A250320002BA4A2 /* NoDataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C09D1AC2A250320002BA4A2 /* NoDataCollectionViewCell.xib */; };
 		8C2D7E4A2A1FDBAF00EF2DB5 /* FavouritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D7E492A1FDBAF00EF2DB5 /* FavouritesViewModel.swift */; };
-		8C2D7E4C2A2006A100EF2DB5 /* \.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D7E4B2A2006A100EF2DB5 /* \.swift */; };
+		8C2D7E4C2A2006A100EF2DB5 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D7E4B2A2006A100EF2DB5 /* NetworkTest.swift */; };
 		8C4785022A1CFB7500144AA1 /* TeamsLogoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4785012A1CFB7500144AA1 /* TeamsLogoCell.swift */; };
 		8C4785072A1D1E9D00144AA1 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4785052A1D1E9D00144AA1 /* SectionHeader.swift */; };
 		8C4785082A1D1E9D00144AA1 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4785062A1D1E9D00144AA1 /* SectionHeader.xib */; };
@@ -82,7 +82,7 @@
 		8C09D1AB2A250320002BA4A2 /* NoDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		8C09D1AC2A250320002BA4A2 /* NoDataCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoDataCollectionViewCell.xib; sourceTree = "<group>"; };
 		8C2D7E492A1FDBAF00EF2DB5 /* FavouritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewModel.swift; sourceTree = "<group>"; };
-		8C2D7E4B2A2006A100EF2DB5 /* \.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\\.swift"; sourceTree = "<group>"; };
+		8C2D7E4B2A2006A100EF2DB5 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		8C4785012A1CFB7500144AA1 /* TeamsLogoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsLogoCell.swift; sourceTree = "<group>"; };
 		8C4785052A1D1E9D00144AA1 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		8C4785062A1D1E9D00144AA1 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
@@ -228,6 +228,7 @@
 		8C5ED1A72A1FD6720040AF1B /* coreData */ = {
 			isa = PBXGroup;
 			children = (
+				8CE83B782A1926520071154E /* Sportify.xcdatamodeld */,
 				8C5ED1A82A1FD68F0040AF1B /* DataBase.swift */,
 			);
 			path = coreData;
@@ -236,6 +237,8 @@
 		8CB12F072A27B47B00C9B3AB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA0B392A2E99C0005E659B /* Utility */,
+				8CBA0B382A2E999E005E659B /* launchScreen */,
 				8CB2B2A82A1B7CAB00CAD59F /* home */,
 				8CB2B2AA2A1B7CC800CAD59F /* leagues */,
 				8C4784FF2A1CFB2500144AA1 /* leagueDetails */,
@@ -344,6 +347,24 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		8CBA0B382A2E999E005E659B /* launchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8CF08D562A250CA200135392 /* LaunchScreenViewController.swift */,
+				8CF08D582A250EAC00135392 /* launch.json */,
+			);
+			path = launchScreen;
+			sourceTree = "<group>";
+		};
+		8CBA0B392A2E99C0005E659B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				8CF08D5A2A25178500135392 /* loading.json */,
+				8CE83BA42A1936E40071154E /* Constants.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		8CBC78FE2A1D31F4003C277F /* leaguesModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,11 +440,6 @@
 				8CE83B7B2A1926530071154E /* Assets.xcassets */,
 				8CE83B7D2A1926530071154E /* LaunchScreen.storyboard */,
 				8CE83B802A1926530071154E /* Info.plist */,
-				8CE83B782A1926520071154E /* Sportify.xcdatamodeld */,
-				8CE83BA42A1936E40071154E /* Constants.swift */,
-				8CF08D582A250EAC00135392 /* launch.json */,
-				8CF08D5A2A25178500135392 /* loading.json */,
-				8CF08D562A250CA200135392 /* LaunchScreenViewController.swift */,
 			);
 			path = Sportify;
 			sourceTree = "<group>";
@@ -432,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				8CE83B892A1926530071154E /* SportifyTests.swift */,
-				8C2D7E4B2A2006A100EF2DB5 /* \.swift */,
+				8C2D7E4B2A2006A100EF2DB5 /* NetworkTest.swift */,
 				8CCA5E0E2A22967C003E3712 /* FakeNetwork.swift */,
 				8CCA5E102A22A097003E3712 /* FakeNetworkTest.swift */,
 			);
@@ -737,7 +753,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C2D7E4C2A2006A100EF2DB5 /* \.swift in Sources */,
+				8C2D7E4C2A2006A100EF2DB5 /* NetworkTest.swift in Sources */,
 				8CCA5E112A22A097003E3712 /* FakeNetworkTest.swift in Sources */,
 				8CCA5E0F2A22967C003E3712 /* FakeNetwork.swift in Sources */,
 				8CE83B8A2A1926530071154E /* SportifyTests.swift in Sources */,

@@ -14,8 +14,8 @@ class TeamsLogoCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       // teamLogo.frame.size.height = teamLogo.frame.size.width
-        teamLogo.layer.cornerRadius = 70
+        teamLogo.frame.size.height = teamLogo.frame.size.width
+        teamLogo.layer.cornerRadius = 50
         teamLogo.clipsToBounds = true
     }
 }

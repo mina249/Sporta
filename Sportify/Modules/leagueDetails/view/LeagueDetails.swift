@@ -11,8 +11,7 @@ private let reuseIdentifier = "Cell"
 
 class LeagueDetails: UICollectionViewController {
     var leagueDetailsViewModel : LeagueDetailsViewModel?
-    @IBOutlet var loading: UIActivityIndicatorView!
-    override func viewDidLoad() {
+     override func viewDidLoad() {
         super.viewDidLoad()
       
         inflateSections()
@@ -198,7 +197,7 @@ class LeagueDetails: UICollectionViewController {
     func loadEvents(){
     
      leagueDetailsViewModel?.bindedFinishedResult={
-            self.loading.isHidden = true
+          
             self.collectionView.reloadData()
         }
      leagueDetailsViewModel?.bindedResult={

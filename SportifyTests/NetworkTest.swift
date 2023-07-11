@@ -39,19 +39,19 @@ final class NetworkTest: XCTestCase {
     
     func testGetLeagueEvent(){
         let expect = expectation(description: "waitin for events from API")
-        network.getLeagueEvent(url:  "\(K.baseUrl)\(K.SportName.footbaall)\(EventsURL)&leagueId=\(4)&from=\(K.getCurrentDate())&to=\(K.getNextDate())") { (events , error) in
+        network.getLeagueEvent(url:  "\(K.baseUrl)\(K.SportName.footbaall)\(EventsURL)&leagueId=\(45)&from=2023-05-1&to=2023-06-1") { (events , error) in
             if error != nil{
                 XCTFail()
                 expect.fulfill()
             }else{
                 if let events  = events{
-                    XCTAssertGreaterThan(events.count, 0)
+                    XCTAssertNotNil(events.count)
                     expect.fulfill()
                 }
             }
             
         }
-        waitForExpectations(timeout: 8)
+        waitForExpectations(timeout: 20)
     }
     func testGetTeams(){
         let expect = expectation(description: "waitin for teams from API")

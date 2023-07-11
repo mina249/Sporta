@@ -18,10 +18,8 @@ class FavouritesLeagueCell: UITableViewCell {
        // cellBuble.roundCorners(corners: [.topRight,.bottomLeft], radius: 30)
         cellView.layer.cornerRadius = cellBuble.frame.size.height / 5
         cellView.clipsToBounds = true
-        cellView.layer.borderWidth = 2
-        cellView.layer.borderColor = UIColor.orange.cgColor
-        cellImage.frame.size.height = cellImage.frame.width
-        cellImage.layer.cornerRadius =  cellImage.frame.size.height / 3
+        cellImage.frame.size.width = cellImage.frame.height
+        cellImage.layer.cornerRadius =  cellImage.frame.size.height / 2
         cellImage.clipsToBounds = true
         
     }

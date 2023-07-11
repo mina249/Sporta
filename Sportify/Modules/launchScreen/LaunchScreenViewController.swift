@@ -11,7 +11,7 @@ class LaunchScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       // tabBarController?.tabBar.isHidden = true
+  
            let animationView = LottieAnimationView(name: "launch")
         animationView.center = self.view.center
            self.view.addSubview(animationView)
